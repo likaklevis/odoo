@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="klevis_fatura_form_view" model="ir.ui.view">
+            <field name="name">Faturat form</field>
+            <field name="model">klevis.fatura</field>
+            <field name="arch" type="xml">
+                <form string="Faturat">
+<!--                    <button name="llogarit_totalin" type="object" string="Shiko totalin" />-->
+                    <sheet>
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        <group>
+                            <field name="klienti"/>
+                            <field name="totali" readonly="1"/>
+                            <field name="menyra_pageses"/>
+                            <field name="ulja" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+                            <field name="per_te_paguar" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+
+                            <field name="dhene_ne_dore" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+                            <field name="kusuri" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+                            <field name="pike_shtuar" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+                            <field name="pike_paguar" attrs="{'invisible': [('menyra_pageses', '!=', 'pike')]}"/>
+                            <field name="ora" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <sheet string='Reshtat'>
+                                <field name="shporta_ids">
+                                    <tree editable="bottom">
+                                        <field name="produkti"/>
+                                        <field name="sasia"/>
+                                        <field name="cmimi"/>
+                                        <field name="totali"/>
+                                    </tree>
+                                </field>
+                            </sheet>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="klevis_fatura_tree_view" model="ir.ui.view">
+            <field name="name">Faturat tree</field>
+            <field name="model">klevis.fatura</field>
+            <field name="arch" type="xml">
+                <tree string="Faturat">
+                    <field name="name"/>
+                    <field name="klienti"/>
+                    <field name="totali"/>
+                    <field name="menyra_pageses"/>
+                    <field name="ulja"/>
+                    <field name="dhene_ne_dore"/>
+                    <field name="kusuri"/>
+                    <field name="pike_shtuar"/>
+                    <field name="pike_paguar"/>
+                    <field name="ora"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record id="shop_fatura_search_view" model="ir.ui.view">-->
+<!--            <field name="name">klevis.fatura.search</field>-->
+<!--            <field name="model">klevis.fatura</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="ModelTitle">-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="klevis_fatura_act_window" model="ir.actions.act_window">
+            <field name="name">Fatura act</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">klevis.fatura</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Kliko ketu te shtosh fature.
+                </p>
+            </field>
+        </record>
+        <menuitem name="ShopApp" id="shop_menu"/>
+        <menuitem name="Faturat" id="shop_fatura_menu" parent="shop_menu" action="klevis_fatura_act_window"/>
+
+    </data>
+</odoo>

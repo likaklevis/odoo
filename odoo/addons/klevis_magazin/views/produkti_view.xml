@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="produkti_form_inherit" model="ir.ui.view">
+            <field name="name">klevis.klevis.produkti.form</field>
+            <field name="model">klevis.produkti</field>
+            <field name="inherit_id" ref="klevis.klevis_produkti_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='vendodhja']" position="after">-->
+<!--                    <field name="magazina_id"/>-->
+<!--                </xpath>-->
+                <xpath expr="//sheet/group" position="after">
+                    <notebook>
+                        <sheet string="Magazinat">
+                            <field name="magazina_id"/>
+                        </sheet>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

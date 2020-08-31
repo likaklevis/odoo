@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="klevis_produkti_form_view" model="ir.ui.view">
+            <field name="name">Produktet form</field>
+            <field name="model">klevis.produkti</field>
+            <field name="arch" type="xml">
+                <form string="Produktet">
+                    <sheet>
+                            <h1>
+                                <field name="name" placeholder="Title"/>
+                            </h1>
+                        <group>
+                            <group>
+                                <field name="cmimi"/>
+                            </group>
+                            <group>
+                                <field name="sasia_ne_gjendje"/>
+                            </group>
+                            <group>
+                                <field name="vendodhja"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="klevis_produkti_tree_view" model="ir.ui.view">
+            <field name="name">Produktet tree</field>
+            <field name="model">klevis.produkti</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                    <field name="cmimi"/>
+                    <field name="sasia_ne_gjendje"/>
+                    <field name="vendodhja"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record id="shop_produkti_search_view" model="ir.ui.view">-->
+<!--            <field name="name">klevis.produkti.search</field>-->
+<!--            <field name="model">klevis.produkti</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="ModelTitle">-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="klevis_produkti_act_window" model="ir.actions.act_window">
+            <field name="name">Produktet act</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">klevis.produkti</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Kliko ketu te shtosh produkt.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Produktet" id="shop_produkti_menu" parent="shop_menu" action="klevis_produkti_act_window"/>
+
+    </data>
+</odoo>

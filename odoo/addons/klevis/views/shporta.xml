@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="klevis_shporta_form_view" model="ir.ui.view">
+            <field name="name">ProjectName.klevisi_shporta.form</field>
+            <field name="model">klevis.shporta</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="example_title"/>
+                            <h1>
+                                <field name="fatura" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="produkti"/>
+                            </group>
+                            <group>
+                                <field name="sasia"/>
+                            </group>
+                            <group>
+                                <field name="cmimi"/>
+                            </group>
+                            <group>
+                                <field name="totali"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="klevis_shporta_tree_view" model="ir.ui.view">
+            <field name="name">klevis.shporta.tree</field>
+            <field name="model">klevis.shporta</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="fatura"/>
+                    <field name="produkti"/>
+                    <field name="sasia"/>
+                    <field name="cmimi"/>
+                    <field name="totali"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record id="klevis_shporta_search_view" model="ir.ui.view">-->
+<!--            <field name="name">ProjectName.klevisi_shporta.search</field>-->
+<!--            <field name="model">ProjectName.klevisi_shporta</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="ModelTitle">-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="klevis_shporta_act_window" model="ir.actions.act_window">
+            <field name="name">ModelTitle</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">klevis.shporta</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Kliko ketu te shtosh produkt ne shporte.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Shporta" id="klevis_shporta_menu" parent="shop_menu" action="klevis_shporta_act_window"/>
+
+    </data>
+</odoo>
