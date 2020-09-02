@@ -7,7 +7,7 @@
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
-            <field name="model_id" ref=""/>
+            <field name="model_id" ref="klevis.monedha"/>
             <field name="code">model.MethodName()</field>
         </record>
     </data>

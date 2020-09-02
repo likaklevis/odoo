@@ -111,3 +111,5 @@ class KlevisFatura(models.Model):
             elif fature.menyra_pageses == 'pike':
                 fature.klienti.piket_shpenzuar -= fature.pike_paguar
             return super(KlevisFatura, fature).unlink()
+
+

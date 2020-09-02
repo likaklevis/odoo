@@ -4,8 +4,6 @@ from odoo import fields, models, api
 class KlevisProdukti(models.Model):
     _inherit = 'klevis.produkti'
 
-    magazina_id = fields.Many2one(comodel_name='klevis.magazina', string='Magazina_id')
-
 
 class KlevisSasia(models.Model):
     _name = 'klevis.sasia'
