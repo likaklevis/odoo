@@ -5,10 +5,10 @@ class KlevisShporta(models.Model):
     _name = 'klevis.shporta'
     _description = 'Description'
 
-    fatura = fields.Many2one(comodel_name='klevis.fatura', string='Fatura', required=False, ondelete="cascade")
-    produkti = fields.Many2one(comodel_name='klevis.produkti', string='Produkti', required=False)
-    sasia = fields.Float(string='Sasia', required=False)
-    cmimi = fields.Float(string='Cmimi', required=False)
+    fatura = fields.Many2one(comodel_name='klevis.fatura', string='Fatura', ondelete="cascade")
+    produkti = fields.Many2one(comodel_name='klevis.produkti', string='Produkti')
+    sasia = fields.Float(string='Sasia')
+    cmimi = fields.Float(string='Cmimi')
     totali = fields.Float(string='Totali', compute="_llogarit_totalin")
 
     @api.multi

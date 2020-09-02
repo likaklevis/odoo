@@ -11,10 +11,15 @@
 <!--                <xpath expr="//field[@name='vendodhja']" position="after">-->
 <!--                    <field name="magazina_id"/>-->
 <!--                </xpath>-->
-                <xpath expr="//sheet/group" position="after">
+                <xpath expr="//sheet/group/group[3]" position="replace">
                     <notebook>
                         <sheet string="Magazinat">
-                            <field name="magazina_id"/>
+                            <field name="magazina_id">
+                                <tree editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="sasia"/>
+                                </tree>
+                            </field>
                         </sheet>
                     </notebook>
                 </xpath>

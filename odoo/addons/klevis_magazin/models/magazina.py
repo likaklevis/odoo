@@ -6,6 +6,3 @@ class KlevisMagazina (models.Model):
 
     name = fields.Char(string='Emri')
     adresa = fields.Char(string='Adresa')
-
-
-

@@ -12,7 +12,7 @@ class KlevisKlienti (models.Model):
     piket_shpenzuar = fields.Float(string='Piket_shpenzuar', required=True, default=0)
     shpenzime_total = fields.Float(string='Shpenzime_total', required=False)
 
-    fatura_ids = fields.One2many(comodel_name='klevis.fatura', inverse_name='klienti', string='Faturat', required=False)
+    fatura_ids = fields.One2many(comodel_name='klevis.fatura', inverse_name='klienti', string='Faturat')
 
     @api.multi
     @api.depends('piket', 'piket_shpenzuar')

@@ -5,20 +5,20 @@ class KlevisFatura(models.Model):
     _name = 'klevis.fatura'
     _description = 'Description'
 
-    name = fields.Char(string='Name', required=False)
+    name = fields.Char(string='Name')
     klienti = fields.Many2one(comodel_name='klevis.klienti', string='Klienti', default=0)
     totali = fields.Float(string='Totali', compute='_llogarit_totalin')
     menyra_pageses = fields.Selection(string='Menyra pageses', required=True,
                                       selection=[('pike', 'Me pike'),
                                                  ('cash', 'Para ne dore')])
     ulja = fields.Float(string='Ulja', compute='_llogarit_uljen')
-    dhene_ne_dore = fields.Float(string='Dhene ne dore', required=False)
+    dhene_ne_dore = fields.Float(string='Dhene ne dore')
     per_te_paguar = fields.Float(string='Per te paguar', compute='_per_te_paguar')  # nese ka ulje
     kusuri = fields.Float(string='Kusuri', compute='_llogarit_kusurin')
     pike_shtuar = fields.Float(string='Pike shtuar', compute='_llogarit_piket')
-    pike_paguar = fields.Float(string='Pike paguar', required=False)
+    pike_paguar = fields.Float(string='Pike paguar')
     ora = fields.Datetime(string='Ora', required=False)
-    shporta_ids = fields.One2many(comodel_name='klevis.shporta', inverse_name='fatura', string='Shporta_ids', required=False)
+    shporta_ids = fields.One2many(comodel_name='klevis.shporta', inverse_name='fatura', string='Shporta_ids')
 
     @api.multi
     @api.depends('shporta_ids')
