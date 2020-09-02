@@ -88,5 +88,6 @@
         <menuitem name="ShopApp" id="shop_menu"/>
         <menuitem name="Faturat" id="shop_fatura_menu" parent="shop_menu" action="klevis_fatura_act_window"/>
 
+
     </data>
 </odoo>

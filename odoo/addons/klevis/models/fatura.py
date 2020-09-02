@@ -61,27 +61,28 @@ class KlevisFatura(models.Model):
 
     @api.model
     def create(self, values):
-        res = super(KlevisFatura, self).create(values)
-        res.ora = fields.datetime.now()
-        res.name = "Fatura {}".format(res.id)
-        if values.get('menyra_pageses') == 'cash':
-            if res.dhene_ne_dore < res.per_te_paguar:
-                raise Warning('Vlera e dhene nuk mjafton per te kryer blerjen')
-            res.klienti.piket += res.pike_shtuar
-            res.klienti.shpenzime_total += res.per_te_paguar
-        elif values.get('menyra_pageses') == 'pike':
-            if res.klienti.piket >= res.pike_paguar >= res.totali:
-                res.klienti.piket -= res.pike_paguar
-                res.klienti.piket_shpenzuar += res.pike_paguar
-            else:
-                raise Warning('Piket nuk jan mjaftueshem')
-        return res
+        if self._context.get('inherited'):
+            return super()
+        else:
+            res = super(KlevisFatura, self).create(values)
+            res.ora = fields.datetime.now()
+            res.name = "Fatura {}".format(res.id)
+            if values.get('menyra_pageses') == 'cash':
+                if res.dhene_ne_dore < res.per_te_paguar:
+                    raise Warning('Vlera e dhene nuk mjafton per te kryer blerjen')
+                res.klienti.piket += res.pike_shtuar
+            elif values.get('menyra_pageses') == 'pike':
+                if res.klienti.piket >= res.pike_paguar >= res.totali:
+                    res.klienti.piket -= res.pike_paguar
+                    res.klienti.piket_shpenzuar += res.pike_paguar
+                else:
+                    raise Warning('Piket nuk jan mjaftueshem')
+            return res
 
     @api.multi
     def write(self, vals):
         for fature in self:
             if fature.menyra_pageses == 'cash':
-                fature.klienti.shpenzime_total -= fature.per_te_paguar
                 fature.klienti.piket -= fature.pike_shtuar
             elif fature.menyra_pageses == 'pike':
                 fature.klienti.piket_shpenzuar -= fature.pike_paguar
@@ -92,8 +93,6 @@ class KlevisFatura(models.Model):
                 if fature.dhene_ne_dore < fature.per_te_paguar:
                     raise Warning('Vlera e dhene nuk mjafton per te kryer blerjen')
                 fature.klienti.piket += fature.pike_shtuar
-                fature.klienti.shpenzime_total += fature.per_te_paguar
-                print(fature.per_te_paguar)
             elif fature.menyra_pageses == 'pike':
                 if fature.klienti.piket >= fature.pike_paguar >= fature.totali:
                     fature.klienti.piket -= fature.pike_paguar
@@ -108,7 +107,6 @@ class KlevisFatura(models.Model):
             for obj in fature.shporta_ids:
                 obj.produkti.sasia_ne_gjendje += obj.sasia
             if fature.menyra_pageses == 'cash':
-                fature.klienti.shpenzime_total -= fature.per_te_paguar
                 fature.klienti.piket -= fature.pike_shtuar
             elif fature.menyra_pageses == 'pike':
                 fature.klienti.piket_shpenzuar -= fature.pike_paguar
