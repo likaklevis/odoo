@@ -4,10 +4,10 @@ from odoo import fields, models, api
 class KlevisFatura(models.Model):
     _inherit = 'klevis.fatura'
 
-    monedha = fields.Many2one(comodel_name='klevismonedha.monedha', string='Monedha', default=lambda self: self.env['klevismonedha.monedha'].search([], limit=1)) # default leku, first record
-    kursi = fields.Float(string='Totali ne lek', compute='_llogarit_kursin')
-    totali_lek = fields.Float(string='Totali ne lek')  # jo 0 nese zgjidhet monedhe tjeter
-    per_te_paguar_lek = fields.Float(string='Pagesa e bere ne Lek')
+    monedha = fields.Many2one(comodel_name='klevismonedha.monedha', string='Monedha', default=lambda self: self.env['klevismonedha.monedha'].search([], limit=1), required=True)  # default leku, first record
+    kursi = fields.Float(string='Kursi')
+    totali_lek = fields.Float(string='Totali ne lek', compute='_llogarit_tot_lek')  # jo 0 nese zgjidhet monedhe tjeter
+    per_te_paguar_lek = fields.Float(string='Pagesa e bere ne Lek', compute='_llogarit_paguar_lek')
 
     @api.multi
     @api.depends('shporta_ids', 'monedha')
@@ -16,7 +16,7 @@ class KlevisFatura(models.Model):
             obj.totali = 0
             for shporte in obj.shporta_ids:
                 obj.totali += shporte.totali
-            obj.totali = obj.totali * obj.monedha.kursi_kembimit
+            obj.totali = obj.totali * 1/obj.kursi if obj.kursi != 0 or obj.kursi else obj.totali
 
     @api.multi
     @api.depends('ulja', 'totali')
@@ -37,7 +37,6 @@ class KlevisFatura(models.Model):
         for obj in self:
             obj.ulja = obj.totali * (obj.klienti.anetarsimi.ulja_perqindja / 100)
 
-
     @api.multi
     @api.depends('per_te_paguar')
     def _llogarit_piket(self):
@@ -50,20 +49,26 @@ class KlevisFatura(models.Model):
             else:
                 obj.pike_shtuar += obj.per_te_paguar * 0.2 * obj.kursi
 
-    @api.multi
-    @api.depends('monedha')
+    @api.onchange('monedha')
     def _llogarit_kursin(self):
-        for obj in self:
-            if obj.monedha.kursi_kembimit:
-                obj.kursi = 1/obj.monedha.kursi_kembimit
+        if self.monedha:
+            self.kursi = 1 / self.monedha.kursi_kembimit
+        else:
+            self.monedha = 1
 
     @api.multi
     @api.depends('monedha', 'shporta_ids', 'kursi')
-    def _llogarit_ne_lek(self):
+    def _llogarit_tot_lek(self):
+        for obj in self:
+            if obj.monedha.simboli != 'ALL':
+                obj.totali_lek = obj.totali * obj.kursi
+
+    @api.multi
+    @api.depends('monedha', 'shporta_ids', 'kursi')
+    def _llogarit_paguar_lek(self):
         for obj in self:
             if obj.monedha.simboli != 'ALL':
                 obj.per_te_paguar_lek = obj.per_te_paguar * obj.kursi
-                obj.totali_lek = obj.totali * obj.kursi
 
     @api.model
     def create(self, values):

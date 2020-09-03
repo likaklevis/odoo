@@ -1,4 +1,5 @@
 from odoo import fields, models, api
+from odoo.exceptions import Warning
 
 
 class KlevisFatura(models.Model):

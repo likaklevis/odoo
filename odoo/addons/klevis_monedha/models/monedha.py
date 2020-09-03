@@ -14,7 +14,8 @@ class KlevisMonedha(models.Model):
         search = self.env['klevismonedha.monedha'].search([])
         for monedha in search:
             api_key = 'bcf2ed045befebbfc604'
-            query = 'ALL_{}'.format(monedha.simboli)
+            self.simboli = self.simboli.upper()
+            query = 'ALL_{}'.format(self.simboli)
             url = 'https://free.currconv.com/api/v7/convert?apiKey={}&q={}&compact=ultra'.format(api_key, query)
             vlera = requests.get(url).json()
             monedha.kursi_kembimit = vlera.get(query)

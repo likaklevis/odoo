@@ -7,7 +7,7 @@ class KlevisShporta(models.Model):
 
     fatura = fields.Many2one(comodel_name='klevis.fatura', string='Fatura', ondelete="cascade")
     produkti = fields.Many2one(comodel_name='klevis.produkti', string='Produkti')
-    sasia = fields.Float(string='Sasia')
+    sasia = fields.Float(string='Sasia', default=1)
     cmimi = fields.Float(string='Cmimi')
     totali = fields.Float(string='Totali', compute="_llogarit_totalin")
 
@@ -20,6 +20,10 @@ class KlevisShporta(models.Model):
                 shport.totali = shport.sasia * shport.produkti.cmimi
             else:
                 shport.totali = shport.sasia * shport.cmimi
+
+    @api.onchange('sasia', 'produkti')
+    def _llogarit_kursin(self):
+        self.cmimi = self.produkti.cmimi
 
     @api.model
     def create(self, values):

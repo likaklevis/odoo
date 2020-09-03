@@ -8,9 +8,8 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <xpath expr="//sheet/group/field[@name='menyra_pageses']" position="after">
-                    <field name="monedha" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}">
-<!--                            <field name="name" widget="selection"/>-->
-                    </field>
+                    <field name="monedha" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
+                    <field name="kursi" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}"/>
                 </xpath>
             </field>
         </record>
