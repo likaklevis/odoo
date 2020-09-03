@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="klevis_fatura_form_inherit" model="ir.ui.view">
+            <field name="name">klevismonedha.fatura.form</field>
+            <field name="model">klevis.fatura</field>
+            <field name="inherit_id" ref="klevis.klevis_fatura_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='menyra_pageses']" position="after">
+                    <field name="monedha" attrs="{'invisible': [('menyra_pageses', '!=', 'cash')]}">
+<!--                            <field name="name" widget="selection"/>-->
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="klevis_fatura_tree_inherit" model="ir.ui.view">
+            <field name="name">klevismonedha.fatura.tree</field>
+            <field name="model">klevis.fatura</field>
+            <field name="inherit_id" ref="klevis.klevis_fatura_tree_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='menyra_pageses']" position="after">
+                    <field name="monedha"/>
+                    <field name="kursi"/>
+                    <field name="totali_lek"/>
+                    <field name="per_te_paguar_lek"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,3 +1,2 @@
 from . import fatura
-from . import klienti
-from . import monedhat
+from . import monedha

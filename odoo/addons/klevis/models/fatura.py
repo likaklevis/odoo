@@ -61,9 +61,6 @@ class KlevisFatura(models.Model):
 
     @api.model
     def create(self, values):
-        if self._context.get('inherited'):
-            return super()
-        else:
             res = super(KlevisFatura, self).create(values)
             res.ora = fields.datetime.now()
             res.name = "Fatura {}".format(res.id)

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="klevismonedha_monedha_form_view" model="ir.ui.view">
+            <field name="name">klevismonedha.monedha.form</field>
+            <field name="model">klevismonedha.monedha</field>
+            <field name="arch" type="xml">
+                <form string="Monedha">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Monedha"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="simboli"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="klevismonedha_monedha_tree_view" model="ir.ui.view">
+            <field name="name">klevismonedha.monedha.tree</field>
+            <field name="model">klevismonedha.monedha</field>
+            <field name="arch" type="xml">
+                <tree string="Monedhat">
+                    <field name="name"/>
+                    <field name="simboli"/>
+                    <field name="kursi_kembimit"/>
+                    <field name="data_perditesuar"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record id="ModelName_search_view" model="ir.ui.view">-->
+<!--            <field name="name">ProjectName.ModelName.search</field>-->
+<!--            <field name="model">ProjectName.ModelName</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="ModelTitle">-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="klevismonedha_monedha_act_window" model="ir.actions.act_window">
+            <field name="name">Monedhat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">klevismonedha.monedha</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Kliko ketu per te shtuar monedha.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Monedhat" id="monedha_menu" parent="klevis.shop_menu" action="klevismonedha_monedha_act_window"/>
+
+    </data>
+</odoo>

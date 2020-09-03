@@ -50,8 +50,9 @@
                     <field name="name"/>
                     <field name="klienti"/>
                     <field name="totali"/>
-                    <field name="menyra_pageses"/>
+                    <field name="per_te_paguar"/>
                     <field name="ulja"/>
+                    <field name="menyra_pageses"/>
                     <field name="dhene_ne_dore"/>
                     <field name="kusuri"/>
                     <field name="pike_shtuar"/>
@@ -85,6 +86,7 @@
                 </p>
             </field>
         </record>
+
         <menuitem name="ShopApp" id="shop_menu"/>
         <menuitem name="Faturat" id="shop_fatura_menu" parent="shop_menu" action="klevis_fatura_act_window"/>
 
