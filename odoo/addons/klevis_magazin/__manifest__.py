@@ -8,7 +8,8 @@
     'author': 'Author',
     'website': 'Website',
     'depends': ['klevis'],
-    'data': ['views/produkti_view.xml'],
+    'data': ['views/produkti_views.xml',
+             'views/sasia_views.xml'],
     'installable': True,
     'auto_install': False,
     'application':True
