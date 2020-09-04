@@ -6,12 +6,11 @@
             <field name="name">klevismagazin.sasia.form</field>
             <field name="model">klevismagazin.sasia</field>
             <field name="arch" type="xml">
-                <form string="Gjendja ne magazina">
+                <form string="ModelTitle">
                     <sheet>
                         <div class="oe_title">
-                            <label for="example_title"/>
                             <h1>
-                                <field name="produkt_id" placeholder="Title"/>
+                                <field name="produkt_id"/>
                             </h1>
                         </div>
                         <group>
@@ -31,7 +30,7 @@
             <field name="name">klevismagazin.sasia.tree</field>
             <field name="model">klevismagazin.sasia</field>
             <field name="arch" type="xml">
-                <tree string="Gjendja ne magazina">
+                <tree string="ModelTitle">
                     <field name="produkt_id"/>
                     <field name="magazine_id"/>
                     <field name="sasia"/>
@@ -40,19 +39,19 @@
         </record>
 
         <record id="klevismagazin_sasia_act_window" model="ir.actions.act_window">
-            <field name="name">Gjendja ne magazina</field>
+            <field name="name">ModelTitle</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">klevismagazin.sasia</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    There is no examples click here to add new ModelTitle.
+                    Kliko ketu te krijosh gjendje produkti ne magazine.
                 </p>
             </field>
         </record>
 
-        <menuitem name="Gjendja ne magazina" id="klevismagazin_sasia_menu" parent="klevis.shop_menu" action="klevismagazin_sasia_act_window"/>
+        <menuitem name="Sasia ne magazina" id="klevismagazin_sasia_menu" parent="klevis.shop_menu" action="klevismagazin_sasia_act_window"/>
 
     </data>
 </odoo>

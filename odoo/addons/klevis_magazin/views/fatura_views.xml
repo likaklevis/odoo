@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="klevismagazin_shporta_form_inherit" model="ir.ui.view">
+            <field name="name">klevismagazin.shporta.fatura.form</field>
+            <field name="model">klevis.fatura</field>
+            <field name="inherit_id" ref="klevis.klevis_fatura_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='shporta_ids']/tree/field[@name='produkti']" position="after">
+                    <field name="magazina_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

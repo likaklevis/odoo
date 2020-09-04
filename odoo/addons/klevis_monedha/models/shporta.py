@@ -13,6 +13,3 @@ class KlevisShporta (models.Model):
     @api.onchange('sasia', 'produkti', 'fatura')
     def _llogarit_kursin(self):
         self.cmimi = self.produkti.cmimi * self.fatura.monedha.kursi_kembimit
-
-
-

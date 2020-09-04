@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="klevismagazin_magazina_form_view" model="ir.ui.view">
+            <field name="name">klevismagazin.magazina.form</field>
+            <field name="model">klevismagazin.magazina</field>
+            <field name="arch" type="xml">
+                <form string="Magazina">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Title"/>
+                            </h1>
+                        </div>
+                            <group>
+                                <field name="adresa"/>
+                            </group>
+                            <group>
+                                <field name="produkt_ids">
+                                    <tree editable="bottom">
+                                        <field name="produkt_id"/>
+                                        <field name="sasia"/>
+                                        <field name="vendodhja_ne_mag"/>
+                                    </tree>
+                                </field>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="klevismagazin_magazina_tree_view" model="ir.ui.view">
+            <field name="name">klevismagazin.magazina.tree</field>
+            <field name="model">klevismagazin.magazina</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                    <field name="adresa"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="klevismagazin_magazina_act_window" model="ir.actions.act_window">
+            <field name="name">Magazina</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">klevismagazin.magazina</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Magazine.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Magazinat" id="klevismagazin_magazina_menu" parent="klevis.shop_menu" action="klevismagazin_magazina_act_window"/>
+
+    </data>
+</odoo>

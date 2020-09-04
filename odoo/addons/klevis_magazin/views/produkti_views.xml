@@ -7,13 +7,15 @@
             <field name="inherit_id" ref="klevis.klevis_produkti_form_view"/>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <xpath expr="//sheet/group/group[3]" position="replace">
+                <xpath expr="//sheet/group/group[3]" position="replace"/>
+                <xpath expr="//form/sheet[1]" position="inside">
                     <notebook>
                         <sheet string="Magazinat">
                             <field name="magazinat_ids">
-                                <field name="produkt_id" invisible="1"/>
-                                <field name="magazine_id"/>
-                                <field name="sasia"/>
+                                <tree editable="bottom">
+                                    <field name="magazine_id"/>
+                                    <field name="sasia"/>
+                                </tree>
                             </field>
                         </sheet>
                     </notebook>

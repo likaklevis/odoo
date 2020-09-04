@@ -1,4 +1,5 @@
 from odoo import fields, models, api
+from odoo.exceptions import Warning
 
 
 class KlevisShporta(models.Model):
@@ -27,24 +28,33 @@ class KlevisShporta(models.Model):
 
     @api.model
     def create(self, values):
-        res = super(KlevisShporta, self).create(values)
-        if values.get('sasia') > res.produkti.sasia_ne_gjendje or values.get('sasia') <= 0:
-            raise UserWarning('Kontrollo sasine qe kerkohet te blihet per produktin {}'.format(res.produkti.name))
+        if self._context.get('inherited_mag'):
+            return super(KlevisShporta, self).create(values)
         else:
-            res.produkti.sasia_ne_gjendje = res.produkti.sasia_ne_gjendje - values.get('sasia')
-        return res
+            res = super(KlevisShporta, self).create(values)
+            if values.get('sasia') > res.produkti.sasia_ne_gjendje or values.get('sasia') <= 0:
+                raise Warning('Kontrollo sasine qe kerkohet te blihet per produktin {}'.format(res.produkti.name))
+            else:
+                res.produkti.sasia_ne_gjendje = res.produkti.sasia_ne_gjendje - values.get('sasia')
+            return res
 
     @api.multi
     def write(self, vals):
         for shporte in self:
-            if vals.get('sasia') > shporte.produkti.sasia_ne_gjendje or vals.get('sasia') <= 0 or not vals.get('sasia'):
-                raise UserWarning('Kontrollo sasine qe kerkohet te blihet per produktin {}'.format(shporte.produkti.name))
+            if shporte._context.get('inherited_mag'):
+                return super(KlevisShporta, shporte).write(vals)
             else:
-                shporte.produkti.sasia_ne_gjendje = shporte.produkti.sasia_ne_gjendje - vals.get('sasia') + shporte.sasia
-            return super(KlevisShporta, shporte).write(vals)
+                if vals.get('sasia') > shporte.produkti.sasia_ne_gjendje or vals.get('sasia') <= 0 or not vals.get('sasia'):
+                    raise Warning('Kontrollo sasine qe kerkohet te blihet per produktin {}'.format(shporte.produkti.name))
+                else:
+                    shporte.produkti.sasia_ne_gjendje = shporte.produkti.sasia_ne_gjendje - vals.get('sasia') + shporte.sasia
+                return super(KlevisShporta, shporte).write(vals)
 
     @api.multi
     def unlink(self):
         for shporte in self:
-            shporte.produkti.sasia_ne_gjendje += shporte.sasia
-            return super(KlevisShporta, shporte).unlink()
+            if shporte._context.get('inherited_mag'):
+                return super(KlevisShporta, shporte).unlink()
+            else:
+                shporte.produkti.sasia_ne_gjendje += shporte.sasia
+                return super(KlevisShporta, shporte).unlink()
