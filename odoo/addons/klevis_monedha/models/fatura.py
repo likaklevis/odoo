@@ -15,8 +15,9 @@ class KlevisFatura(models.Model):
         for obj in self:
             obj.totali = 0
             for shporte in obj.shporta_ids:
+                shporte.cmimi = shporte.produkti.cmimi * 1 / obj.kursi if obj.kursi != 0 or obj.kursi else obj.totali
                 obj.totali += shporte.totali
-            obj.totali = obj.totali * 1/obj.kursi if obj.kursi != 0 or obj.kursi else obj.totali
+
 
     @api.multi
     @api.depends('ulja', 'totali')
@@ -53,8 +54,6 @@ class KlevisFatura(models.Model):
     def _llogarit_kursin(self):
         if self.monedha:
             self.kursi = 1 / self.monedha.kursi_kembimit
-        else:
-            self.monedha = 1
 
     @api.multi
     @api.depends('monedha', 'shporta_ids', 'kursi')

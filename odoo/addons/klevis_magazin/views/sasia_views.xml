@@ -39,18 +39,6 @@
             </field>
         </record>
 
-<!--        <record id="klevismagazin_sasia_search_view" model="ir.ui.view">-->
-<!--            <field name="name">klevismagazin.sasia.search</field>-->
-<!--            <field name="model">klevismagazin.sasia</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <search string="ModelTitle">-->
-<!--                    <group expand="1" string="Group By">-->
-<!--                        <filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>-->
-<!--                    </group>-->
-<!--                </search>-->
-<!--            </field>-->
-<!--        </record>-->
-
         <record id="klevismagazin_sasia_act_window" model="ir.actions.act_window">
             <field name="name">Gjendja ne magazina</field>
             <field name="type">ir.actions.act_window</field>
