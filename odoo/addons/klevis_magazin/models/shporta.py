@@ -63,5 +63,5 @@ class KlevisShporta(models.Model):
         for shporte in self:
             ctx = shporte._context.copy()
             ctx['inherited_mag'] = True
-            shporte.sasia_id.sasia += shporte.sasia
+            shporte.produkti.magazinat_ids.sasia += shporte.sasia
             return super(KlevisShporta, shporte.with_context(ctx)).unlink()
