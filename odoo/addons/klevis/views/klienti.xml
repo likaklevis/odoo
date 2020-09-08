@@ -22,9 +22,6 @@
                             <group>
                                 <field name="piket_shpenzuar"/>
                             </group>
-                            <group>
-                                <field name="shpenzime_total"/>
-                            </group>
                         </group>
                     </sheet>
                 </form>
@@ -41,7 +38,6 @@
                     <field name="anetarsimi"/>
                     <field name="piket"/>
                     <field name="piket_shpenzuar"/>
-                    <field name="shpenzime_total"/>
                 </tree>
             </field>
         </record>

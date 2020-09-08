@@ -4,7 +4,7 @@ from odoo import fields, models, api
 class KlevisFatura(models.Model):
     _inherit = 'klevis.fatura'
 
-    monedha = fields.Many2one(comodel_name='klevismonedha.monedha', string='Monedha', default=lambda self: self.env['klevismonedha.monedha'].search([], limit=1), required=True)  # default leku, first record
+    monedha = fields.Many2one(comodel_name='klevismonedha.monedha', string='Monedha', default=1, required=True)  # default leku, first record
     kursi = fields.Float(string='Kursi')
     totali_lek = fields.Float(string='Totali ne lek', compute='_llogarit_tot_lek')  # jo 0 nese zgjidhet monedhe tjeter
     per_te_paguar_lek = fields.Float(string='Pagesa e bere ne Lek', compute='_llogarit_paguar_lek')

@@ -10,7 +10,6 @@ class KlevisKlienti (models.Model):
     anetarsimi = fields.Many2one(comodel_name='klevis.anetarsimi', compute='_llogarit_antarsimin', string='Anetarsimi')
     piket = fields.Float(string='Piket', required=True, default=0)
     piket_shpenzuar = fields.Float(string='Piket_shpenzuar', required=True, default=0)
-    shpenzime_total = fields.Float(string='Shpenzime_total', required=False)
 
     fatura_ids = fields.One2many(comodel_name='klevis.fatura', inverse_name='klienti', string='Faturat')
 
