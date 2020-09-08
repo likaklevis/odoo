@@ -14,7 +14,7 @@ class KlevisKlienti (models.Model):
     fatura_ids = fields.One2many(comodel_name='klevis.fatura', inverse_name='klienti', string='Faturat')
 
     @api.multi
-    @api.depends('piket', 'piket_shpenzuar')
+    @api.depends('piket')
     def _llogarit_antarsimin(self):
         for klienti in self:
             klienti.anetarsimi = self.env['klevis.anetarsimi'].search([('piket', '<=', (klienti.piket + klienti.piket_shpenzuar))], order='piket desc', limit=1).id
