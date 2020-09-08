@@ -27,11 +27,12 @@ class KlevisShporta(models.Model):
             search = self.env['klevismagazin.sasia'].search([('produkt_id', '=', res.produkti.id), ('sasia', '>=', res.sasia)])
             if search:
                 for obj in search:
-                    listmag.append(obj.magazina_id.name)
-                magazinat_lira = ', '.join(listmag)
-                raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Magazinat qe suportojn sasine e caktuar: '.format(res.produkti.name, res.magazina_id.name, magazinat_lira))
-            else:
-                raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Asnje magazine nuk e suporton dot sasine e kerkuar.'.format(res.produkti.name, res.magazina_id.name))
+                    listmag.append(obj.magazine_id.name)
+                if len(listmag) == 0:
+                    magazinat_lira = ', '.join(listmag)
+                    raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Magazinat qe suportojn sasine e caktuar: '.format(res.produkti.name, res.magazina_id.name, magazinat_lira))
+                else:
+                    raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Asnje magazine nuk e suporton dot sasine e kerkuar.'.format(res.produkti.name, res.magazina_id.name))
         else:
             res.sasia_id.sasia = res.sasia_id.sasia - values.get('sasia')
         return res

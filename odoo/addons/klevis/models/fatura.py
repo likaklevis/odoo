@@ -101,13 +101,16 @@ class KlevisFatura(models.Model):
 
     @api.multi
     def unlink(self):
-        for fature in self:
-            for obj in fature.shporta_ids:
-                obj.produkti.sasia_ne_gjendje += obj.sasia
-            if fature.menyra_pageses == 'cash':
-                fature.klienti.piket -= fature.pike_shtuar
-            elif fature.menyra_pageses == 'pike':
-                fature.klienti.piket_shpenzuar -= fature.pike_paguar
-            return super(KlevisFatura, fature).unlink()
+        if self._context.get('inherited_mag'):
+            return super(KlevisFatura, self).unlink()
+        else:
+            for fature in self:
+                for obj in fature.shporta_ids:
+                    obj.produkti.sasia_ne_gjendje += obj.sasia
+                if fature.menyra_pageses == 'cash':
+                    fature.klienti.piket -= fature.pike_shtuar
+                elif fature.menyra_pageses == 'pike':
+                    fature.klienti.piket_shpenzuar -= fature.pike_paguar
+                return super(KlevisFatura, fature).unlink()
 
 
