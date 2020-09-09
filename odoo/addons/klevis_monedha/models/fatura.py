@@ -18,7 +18,6 @@ class KlevisFatura(models.Model):
                 shporte.cmimi = shporte.produkti.cmimi * 1 / obj.kursi if obj.kursi != 0 or obj.kursi else obj.totali
                 obj.totali += shporte.totali
 
-
     @api.multi
     @api.depends('ulja', 'totali')
     def _per_te_paguar(self):

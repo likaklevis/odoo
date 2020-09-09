@@ -42,19 +42,17 @@ class KlevisShporta(models.Model):
         for shporte in self:
             ctx = shporte._context.copy()
             ctx['inherited_mag'] = True
-            print(shporte.sasia_id.sasia)
-            print(vals.get('sasia'))
             if vals.get('sasia') > shporte.sasia_id.sasia or vals.get('sasia') <= 0 or not vals.get('sasia'):
                 listmag = []
                 search = self.env['klevismagazin.sasia'].search([('produkt_id', '=', shporte.produkti.id), ('sasia', '>=', shporte.sasia)])
                 if search and vals.get('sasia') > shporte.sasia_id.sasia:
                     for obj in search:
                         listmag.append(obj.magazine_id.name)
-                    magazinat_lira = ', '.join(listmag)
-                    print(shporte.sasia_id.sasia)
-                    raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Magazinat qe suportojn sasine e caktuar: '.format(shporte.produkti.name, shporte.magazina_id.name, magazinat_lira))
-                else:
-                    raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Asnje magazine nuk e suporton dot sasine e kerkuar.'.format(shporte.produkti.name, shporte.magazina_id.name))
+                    if len(listmag) == 0:
+                        magazinat_lira = ', '.join(listmag)
+                        raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Magazinat qe suportojn sasine e caktuar: '.format(shporte.produkti.name, shporte.magazina_id.name, magazinat_lira))
+                    else:
+                        raise UserError('Sasia qe kerkohet te blihet per produktin {} nuk ka ne magazinen {}. Asnje magazine nuk e suporton dot sasine e kerkuar.'.format(shporte.produkti.name, shporte.magazina_id.name))
             else:
                 shporte.sasia_id.sasia = shporte.sasia_id.sasia - vals.get('sasia') + shporte.sasia
             return super(KlevisShporta, shporte.with_context(ctx)).write(vals)
